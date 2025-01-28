@@ -63,6 +63,13 @@
             variant="ghost"
           />
           <UButton
+            to="/maintenance-status"
+            icon="i-heroicons-maintenance"
+            label="Maintenance Status"
+            :color="$route.path === '/maintenance-status' ? 'primary' : 'gray'"
+            variant="ghost"
+          />
+          <UButton
             to="/privacy"
             icon="i-heroicons-privacy"
             label="Privacy"
