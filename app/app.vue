@@ -1,47 +1,3 @@
-<script setup lang="ts">
-import type { DropdownItem } from '#ui/types'
-
-const { loggedIn, user, clear } = useUserSession()
-const colorMode = useColorMode()
-
-watch(loggedIn, () => {
-  if (!loggedIn.value) {
-    navigateTo('/')
-  }
-})
-
-const isDarkMode = computed({
-  get: () => colorMode.preference === 'dark',
-  set: () =>
-    (colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark')
-})
-
-useHead({
-  htmlAttrs: { lang: 'en' },
-  link: [{ rel: 'icon', href: '/icon.png' }]
-})
-
-useSeoMeta({
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
-  title: 'Atidone',
-  description:
-    'A Nuxt demo hosted with edge-side rendering, authentication and queyring a Cloudflare D1 database',
-  ogImage: '/social-image.png',
-  twitterImage: '/social-image.png',
-  twitterCard: 'summary_large_image'
-})
-
-const items = [
-  [
-    {
-      label: 'Logout',
-      icon: 'i-heroicons-arrow-left-on-rectangle',
-      click: clear
-    }
-  ]
-] satisfies DropdownItem[][]
-</script>
-
 <template>
   <UContainer class="min-h-screen flex flex-col my-4">
     <div class="mb-2 text-right">
@@ -92,23 +48,48 @@ const items = [
             :color="$route.path === '/optimistic-todos' ? 'primary' : 'gray'"
             variant="ghost"
           />
-          <UDropdown
-            v-if="user"
-            :items="items"
-          >
-            <UButton
-              color="gray"
-              variant="ghost"
-              trailing-icon="i-heroicons-chevron-down-20-solid"
-            >
-              <UAvatar
-                :src="`https://github.com/${user.login}.png`"
-                :alt="user.login"
-                size="3xs"
-              />
-              {{ user.login }}
-            </UButton>
-          </UDropdown>
+          <UButton
+            to="/login"
+            icon="i-heroicons-login"
+            label="Login"
+            :color="$route.path === '/login' ? 'primary' : 'gray'"
+            variant="ghost"
+          />
+          <UButton
+            to="/maintenance-request"
+            icon="i-heroicons-maintenance"
+            label="Maintenance Request"
+            :color="$route.path === '/maintenance-request' ? 'primary' : 'gray'"
+            variant="ghost"
+          />
+          <UButton
+            to="/privacy"
+            icon="i-heroicons-privacy"
+            label="Privacy"
+            :color="$route.path === '/privacy' ? 'primary' : 'gray'"
+            variant="ghost"
+          />
+          <UButton
+            to="/register"
+            icon="i-heroicons-register"
+            label="Register"
+            :color="$route.path === '/register' ? 'primary' : 'gray'"
+            variant="ghost"
+          />
+          <UButton
+            to="/profile"
+            icon="i-heroicons-profile"
+            label="Profile"
+            :color="$route.path === '/profile' ? 'primary' : 'gray'"
+            variant="ghost"
+          />
+          <UButton
+            to="/dashboard"
+            icon="i-heroicons-dashboard"
+            label="Dashboard"
+            :color="$route.path === '/dashboard' ? 'primary' : 'gray'"
+            variant="ghost"
+          />
         </div>
       </template>
       <NuxtPage />
@@ -134,9 +115,3 @@ const items = [
   </UContainer>
   <UNotifications />
 </template>
-
-<style lang="postcss">
-body {
-  @apply font-sans text-gray-950 bg-gray-50 dark:bg-gray-950 dark:text-gray-50;
-}
-</style>
