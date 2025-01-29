@@ -15,13 +15,17 @@ export default defineNuxtConfig({
   hub: {
     database: true
   },
-  // Development config
   eslint: {
     config: {
       stylistic: {
         quotes: 'single',
         commaDangle: 'never'
       }
+    }
+  },
+  experimental: {
+    features: {
+      nitro: true
     }
   }
 })
